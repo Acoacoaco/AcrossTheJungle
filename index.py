@@ -12,8 +12,15 @@ icon = pygame.image.load(".\images\gamepad.png")
 pygame.display.set_icon(icon)
 
 player = Player()
-taxi = Vehicle("taxi", "right", 1)
-van = Vehicle("van", "left", 3)
+turtle = Vehicle("turtle", "left", 1)
+bird = Vehicle("bird", "right", 2)
+bicycle = Vehicle("bicycle", "left", 3)
+taxi = Vehicle("taxi", "right", 4)
+truck = Vehicle("truck", "left", 5)
+police_car = Vehicle("police-car", "right", 6)
+van = Vehicle("van", "left", 7)
+motorbike = Vehicle("motorbike", "right", 8)
+unicorn = Vehicle("unicorn", "left", 9)
 
 running = True
 while running:
@@ -35,10 +42,25 @@ while running:
                 if player.position_y < 500:
                     player.position_y += 50
     
+    turtle.vehicleMove()
+    bird.vehicleMove()
+    bicycle.vehicleMove()
     taxi.vehicleMove()
+    truck.vehicleMove()
+    police_car.vehicleMove()
     van.vehicleMove()
+    motorbike.vehicleMove()
+    unicorn.vehicleMove()
+
     screen.blit(player.image, (player.position_x, player.position_y))
+    screen.blit(turtle.image, (turtle.position_x, turtle.position_y))
+    screen.blit(bird.image, (bird.position_x, bird.position_y))
+    screen.blit(bicycle.image, (bicycle.position_x, bicycle.position_y))
     screen.blit(taxi.image, (taxi.position_x, taxi.position_y))
+    screen.blit(truck.image, (truck.position_x, truck.position_y))
+    screen.blit(police_car.image, (police_car.position_x, police_car.position_y))
     screen.blit(van.image, (van.position_x, van.position_y))
+    screen.blit(motorbike.image, (motorbike.position_x, motorbike.position_y))
+    screen.blit(unicorn.image, (unicorn.position_x, unicorn.position_y))
     pygame.display.update()
         

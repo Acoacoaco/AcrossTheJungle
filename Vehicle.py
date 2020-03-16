@@ -1,5 +1,5 @@
 import pygame
-# import random
+import random
 
 class Vehicle:
     def __init__(self, name, direction, line):
@@ -9,19 +9,18 @@ class Vehicle:
         self.direction = direction
         self.line = line
         self.position_x = 375
-        self.position_y = 20 + (line * 50)
-        # self.go_right = ("police-car", "taxi", "motorbike")
-        # self.go_left = ("bicycle", "van", "truck")
+        self.position_y = 20 + (self.line * 50)
+        self.speed = random.uniform(0.1, 1)
     
     def vehicleMove(self):
         if self.direction == "right":
             if self.position_x < 750:
-                self.position_x += 2
+                self.position_x += self.speed
             else:
                 self.position_x = -50
         elif self.direction == "left":
             if self.position_x > -50:
-                self.position_x -= 0.5
+                self.position_x -= self.speed
             else:
                 self.position_x = 750
         
