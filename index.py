@@ -1,5 +1,6 @@
 import pygame
 from Player import Player
+from Vehicle import Vehicle
 
 pygame.init()
 
@@ -11,12 +12,12 @@ icon = pygame.image.load(".\images\gamepad.png")
 pygame.display.set_icon(icon)
 
 player = Player()
-
+taxi = Vehicle("taxi", "right", 1)
+van = Vehicle("van", "left", 3)
 
 running = True
 while running:
-    screen.fill((155, 255, 255))
-
+    screen.fill((100, 100, 100))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -33,7 +34,11 @@ while running:
             elif event.key == pygame.K_DOWN:
                 if player.position_y < 500:
                     player.position_y += 50
-  
+    
+    taxi.vehicleMove()
+    van.vehicleMove()
     screen.blit(player.image, (player.position_x, player.position_y))
+    screen.blit(taxi.image, (taxi.position_x, taxi.position_y))
+    screen.blit(van.image, (van.position_x, van.position_y))
     pygame.display.update()
         
