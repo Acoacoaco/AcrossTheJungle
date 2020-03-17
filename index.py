@@ -46,8 +46,8 @@ while game.running:
     # background color
     game.screen.fill((255, 255, 255))
     # background image
-    game.display(game.background, 0, 0)
-
+    game.draw(game.background, 0, 0)
+	
     for event in pygame.event.get():
         #quit option   
         if event.type == pygame.QUIT:
@@ -55,27 +55,30 @@ while game.running:
 
         # controls
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and player.position_x > 0:
-                player.position_x -= 50
-            elif event.key == pygame.K_RIGHT and player.position_x < 700:
-                player.position_x += 50
-            elif event.key == pygame.K_UP and player.position_y > 20:
-                player.position_y -= 50
-            elif event.key == pygame.K_DOWN and player.position_y < 500:
-                player.position_y += 50
+            if event.key == pygame.K_LEFT:
+                player.moveLeft()
+            elif event.key == pygame.K_RIGHT:
+                player.moveRight()
+            elif event.key == pygame.K_UP:
+                player.moveUp()
+            elif event.key == pygame.K_DOWN:
+                player.moveDown()
 
-    # player render
-    game.display(player.image, player.position_x, player.position_y)   
+    # player draw
+    game.draw(player.image, player.position_x, player.position_y)   
 
     # animals moves and render
     for animal in animals_list:
         animal.animalMove()
-        game.display(animal.image, animal.position_x, animal.position_y)
+        game.draw(animal.image, animal.position_x, animal.position_y)
         # colision check
-        if (player.position_x <= animal.position_x + 31 and player.position_x >= animal.position_x - 31) and player.position_y == animal.position_y:
-            player.hasColision()
+        if game.colisionCheck(player.position_x, player.position_y, animal.position_x, animal.position_y):
+            player.__init__()
+
+    # instructions
+    game.draw(game.showInstructions(), 10, 10)
 
     # screen update
-    game.render()
+    game.display()
 
          

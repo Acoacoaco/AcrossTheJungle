@@ -7,6 +7,20 @@ class Player:
         self.position_x = 350
         self.position_y = 20
 
-    def hasColision(self):
-        self.position_x = 350
-        self.position_y = 20
+    # controls
+    def moveLeft(self):
+        if self.position_x > 0:
+            self.position_x -= 50
+    
+    def moveRight(self):
+        if self.position_x < 700:
+            self.position_x += 50
+
+    def moveUp(self):
+        if self.position_y > 20:
+            self.position_y -= 50
+
+    def moveDown(self):
+        if self.position_y < 500:
+            self.position_y += 50
+                
