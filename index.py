@@ -1,23 +1,18 @@
 # imports
 import pygame
+from Game import Game
 from Player import Player
 from Animal import Animal
 
 # initialize PyGame
 pygame.init()
 
-# screen properties
-screen = pygame.display.set_mode((750, 590))
-
-# background
-# <a href="https://www.freepik.com/free-photos-vectors/logo">Logo vector created by valadzionak_volha - www.freepik.com</a>
-background = pygame.image.load(".\images\\background.png")
+# new game
+game = Game()
 
 # caption and icon
-pygame.display.set_caption("Across The Jungle")
-# Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-icon = pygame.image.load(".\images\monkey.png")
-pygame.display.set_icon(icon)
+game.captionDisplay()
+game.iconDisplay()
 
 # new player
 player = Player()
@@ -47,41 +42,40 @@ animals_list.append(lion)
 animals_list.append(rhino)
 
 # gameloop
-running = True
-while running:
+while game.running:
     # background color
-    screen.fill((255, 255, 255))
+    game.screen.fill((255, 255, 255))
     # background image
-    screen.blit(background, (0, 0))
+    game.display(game.background, 0, 0)
 
     for event in pygame.event.get():
         #quit option   
         if event.type == pygame.QUIT:
-            running = False
+            game.running = False
 
         # controls
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT and player.position_x > 0:
-                    player.position_x -= 50
+                player.position_x -= 50
             elif event.key == pygame.K_RIGHT and player.position_x < 700:
-                    player.position_x += 50
+                player.position_x += 50
             elif event.key == pygame.K_UP and player.position_y > 20:
-                    player.position_y -= 50
+                player.position_y -= 50
             elif event.key == pygame.K_DOWN and player.position_y < 500:
-                    player.position_y += 50
+                player.position_y += 50
 
     # player render
-    screen.blit(player.image, (player.position_x, player.position_y))   
+    game.display(player.image, player.position_x, player.position_y)   
 
     # animals moves and render
     for animal in animals_list:
         animal.animalMove()
-        screen.blit(animal.image, (animal.position_x, animal.position_y))
+        game.display(animal.image, animal.position_x, animal.position_y)
         # colision check
         if (player.position_x <= animal.position_x + 31 and player.position_x >= animal.position_x - 31) and player.position_y == animal.position_y:
             player.hasColision()
 
     # screen update
-    pygame.display.update()
+    game.render()
 
          
