@@ -10,14 +10,14 @@ class Game:
 
         # background
         # <a href="https://www.freepik.com/free-photos-vectors/logo">Logo vector created by valadzionak_volha - www.freepik.com</a>
-        self.background = pygame.image.load(".\images\\background.png")
+        self.background = pygame.image.load("./images/background.png")
         
         # caption
         self.caption = "Across The Jungle"
 
         # icon
         # Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-        self.icon = pygame.image.load(".\images\monkey.png")
+        self.icon = pygame.image.load("./images/monkey.png")
 
         # font properties
         self.font = pygame.font.Font("freesansbold.ttf", 13) 
@@ -62,5 +62,9 @@ class Game:
 
     # show instructions
     def showInstructions(self):
-        return self.font.render("Use keyboard arrows to get back home. Avoid animals!", True, (255, 255, 255))
+        return self.font.render("Use keyboard arrows to get to the camp. Avoid animals!", True, (255, 255, 255))
 
+    # music
+    def playMusic(self):
+        pygame.mixer.music.load("./music/jungle.wav")
+        pygame.mixer.music.play(-1)

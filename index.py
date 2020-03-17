@@ -3,6 +3,7 @@ import pygame
 from Game import Game
 from Player import Player
 from Animal import Animal
+from Camp import Camp
 
 # initialize PyGame
 pygame.init()
@@ -13,6 +14,9 @@ game = Game()
 # caption and icon
 game.captionDisplay()
 game.iconDisplay()
+
+# new home
+camp = Camp()
 
 # new player
 player = Player()
@@ -41,6 +45,9 @@ animals_list.append(raccoon)
 animals_list.append(lion)
 animals_list.append(rhino)
 
+# music
+game.playMusic()
+
 # gameloop
 while game.running:
     # background color
@@ -64,6 +71,9 @@ while game.running:
             elif event.key == pygame.K_DOWN:
                 player.moveDown()
 
+    # camp draw
+    game.draw(camp.image, camp.position_x, camp.position_y)   
+
     # player draw
     game.draw(player.image, player.position_x, player.position_y)   
 
@@ -73,6 +83,7 @@ while game.running:
         game.draw(animal.image, animal.position_x, animal.position_y)
         # colision check
         if game.colisionCheck(player.position_x, player.position_y, animal.position_x, animal.position_y):
+            player.makeSound()
             player.__init__()
 
     # instructions

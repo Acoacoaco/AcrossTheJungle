@@ -5,7 +5,7 @@ class Animal:
     def __init__(self, name, direction, line):
         # Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
         self.name = name
-        self.image = pygame.transform.scale(pygame.image.load(".\images\\" + self.name + ".png"), (50, 50))
+        self.image = pygame.transform.scale(pygame.image.load("./images/" + self.name + ".png"), (50, 50))
         self.direction = direction
         self.line = line
         self.position_x = random.randint(0, 750)
