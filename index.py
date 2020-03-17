@@ -70,14 +70,18 @@ while running:
             elif event.key == pygame.K_DOWN and player.position_y < 500:
                     player.position_y += 50
 
+    # player render
+    screen.blit(player.image, (player.position_x, player.position_y))   
+
     # animals moves and render
     for animal in animals_list:
         animal.animalMove()
         screen.blit(animal.image, (animal.position_x, animal.position_y))
-    
-    # player render
-    screen.blit(player.image, (player.position_x, player.position_y))
+        # colision check
+        if (player.position_x <= animal.position_x + 31 and player.position_x >= animal.position_x - 31) and player.position_y == animal.position_y:
+            player.hasColision()
 
     # screen update
     pygame.display.update()
-        
+
+         

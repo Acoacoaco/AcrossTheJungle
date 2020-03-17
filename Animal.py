@@ -10,7 +10,7 @@ class Animal:
         self.line = line
         self.position_x = random.randint(0, 750)
         self.position_y = 20 + (self.line * 50)
-        self.speed = random.uniform(0.5, 2)
+        self.speed = random.randint(1, 3)
     
     def animalMove(self):
         if self.direction == "right":

@@ -6,3 +6,7 @@ class Player:
         self.image = pygame.transform.scale(pygame.image.load(".\images\man.png"), (50, 50))
         self.position_x = 350
         self.position_y = 20
+
+    def hasColision(self):
+        self.position_x = 350
+        self.position_y = 20
