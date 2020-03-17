@@ -1,3 +1,3 @@
-# CrossTheStreet
+# AcrossTheJungle
 
 Python, PyGames, OOP
