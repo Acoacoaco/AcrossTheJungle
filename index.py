@@ -56,6 +56,9 @@ while game.running:
     # instructions
     game.draw(game.showInstructions(), 10, 10)
 
+    # level
+    game.draw(game.showLevel(), 650, 10)
+
     # camp draw
     game.draw(camp.image, camp.position_x, camp.position_y)
 
@@ -83,19 +86,23 @@ while game.running:
             elif event.key == pygame.K_DOWN:
                 player.moveDown()
             elif event.key == pygame.K_RETURN:
+                game.level += 1
                 if not player.can_move:
-                    game.__init__()
+                    game.can_change_music = 1
                     camp.__init__()
                     player.__init__()
-                    animals_list.append(cheatah)
-                    animals_list.append(crocodile)
-                    animals_list.append(elephant)
-                    animals_list.append(giraffe)
-                    animals_list.append(panda)
-                    animals_list.append(monkey)
-                    animals_list.append(raccoon)
-                    animals_list.append(lion)
-                    animals_list.append(rhino)
+                    cheatah.__init__("cheatah", "left", 1)
+                    crocodile.__init__("crocodile", "right", 2)
+                    elephant.__init__("elephant", "left", 3)
+                    giraffe.__init__("giraffe", "right", 4)
+                    panda.__init__("panda", "left", 5)
+                    monkey.__init__("monkey", "right", 6)
+                    raccoon.__init__("raccoon", "left", 7)
+                    lion.__init__("lion", "right", 8)
+                    rhino.__init__("rhino", "left", 9)
+                    for animal in animals_list:
+                        animal.speed = animal.speed * game.level
+                    
 
     # animals moves and render
     for animal in animals_list:
@@ -111,8 +118,9 @@ while game.running:
         player.can_move = 0
         #  win text
         game.draw(game.showWinText(), 65, 200)
-        game.draw(game.showInstructions2(), 245, 250)
-        animals_list.clear()
+        game.draw(game.showInstructions2(), 215, 250)
+        for animal in animals_list:
+            animal.position_y = 2000
         if game.can_change_music == 2:
             game.playMusic("camp")
             game.can_change_music = 0

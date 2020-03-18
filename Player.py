@@ -6,6 +6,7 @@ class Player:
         self.image = pygame.transform.scale(pygame.image.load("./images/man.png"), (50, 50))
         self.position_x = 350
         self.position_y = 20
+        # https://www.freesoundeffects.com/
         self.sound = pygame.mixer.Sound("./music/sound.wav")
         self.can_move = 1
 

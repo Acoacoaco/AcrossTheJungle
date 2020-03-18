@@ -15,21 +15,21 @@ class Game:
         # caption
         self.caption = "Across The Jungle"
 
+        # level
+        self.level = 0
+
         # icon
         # Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
         self.icon = pygame.image.load("./images/monkey.png")
-
-        # music
-        # https://www.freesoundeffects.com/
 
         # change music
         self.can_change_music = 1
 
         # insturctons text properties
-        self.instructions = pygame.font.Font("freesansbold.ttf", 13) 
+        self.instructions = pygame.font.Font("./fonts/FreeSansBold.ttf", 13) 
 
         # win text properties
-        self.win = pygame.font.Font("freesansbold.ttf", 50) 
+        self.win = pygame.font.Font("./fonts/FreeSansBold.ttf", 50) 
     
     # caption and icon display
     def captionDisplay(self):
@@ -52,8 +52,12 @@ class Game:
 
     # show instructions2
     def showInstructions2(self):
-        return self.instructions.render("Press ENTER, if you want to play again.", True, (255, 255, 255))
+        return self.instructions.render("Press ENTER, if you want to play on the next level.", True, (255, 255, 255))
    
+    # show instructions2
+    def showLevel(self):
+        return self.instructions.render("Danger level: " + str(self.level), True, (255, 0, 0))
+
     # controls
     def operations(self, move_left, move_right, move_up, move_down):
         for event in pygame.event.get():
@@ -88,14 +92,9 @@ class Game:
 
     # play music
     def playMusic(self, title):
+        # https://www.freesoundeffects.com/
         pygame.mixer.music.stop()
         # load music
         self.music = pygame.mixer.music.load("./music/" +title+ ".wav")
         # play music
         pygame.mixer.music.play(-1)
-
-    # restart
-    # def restart(self):
-    #     import sys
-    #     import os
-    #     os.execl(sys.executable, sys.executable, *sys.argv)
