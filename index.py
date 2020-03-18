@@ -15,7 +15,7 @@ game = Game()
 game.captionDisplay()
 game.iconDisplay()
 
-# new home
+# new camp
 camp = Camp()
 
 # new player
@@ -52,8 +52,18 @@ game.playMusic()
 while game.running:
     # background color
     game.screen.fill((255, 255, 255))
+
     # background image
     game.draw(game.background, 0, 0)
+
+    # instructions
+    game.draw(game.showInstructions(), 10, 10)
+
+    # camp draw
+    game.draw(camp.image, camp.position_x, camp.position_y)
+
+    # player draw
+    game.draw(player.image, player.position_x, player.position_y)   
 	
     for event in pygame.event.get():
         #quit option   
@@ -71,12 +81,6 @@ while game.running:
             elif event.key == pygame.K_DOWN:
                 player.moveDown()
 
-    # camp draw
-    game.draw(camp.image, camp.position_x, camp.position_y)   
-
-    # player draw
-    game.draw(player.image, player.position_x, player.position_y)   
-
     # animals moves and render
     for animal in animals_list:
         animal.animalMove()
@@ -86,9 +90,14 @@ while game.running:
             player.makeSound()
             player.__init__()
 
-    # instructions
-    game.draw(game.showInstructions(), 10, 10)
-
+    # is man in camp?
+    if game.isInCampCheck(player.position_x, player.position_y, camp.position_x, camp.position_y):
+        #  win text
+        game.draw(game.showWinText(), 65, 200)
+        animals_list.clear()
+        if game.can_change_music:
+            game.changeMusic()
+            game.can_change_music = 0
     # screen update
     game.display()
 

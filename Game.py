@@ -19,8 +19,18 @@ class Game:
         # Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
         self.icon = pygame.image.load("./images/monkey.png")
 
-        # font properties
-        self.font = pygame.font.Font("freesansbold.ttf", 13) 
+        # music
+        # https://www.freesoundeffects.com/
+        self.music = pygame.mixer.music.load("./music/jungle.wav")
+
+        # change music
+        self.can_change_music = 1
+
+        # insturctons text properties
+        self.instructions = pygame.font.Font("freesansbold.ttf", 13) 
+
+        # win text properties
+        self.win = pygame.font.Font("freesansbold.ttf", 50) 
     
     # caption and icon display
     def captionDisplay(self):
@@ -37,11 +47,15 @@ class Game:
     def display(self):
         pygame.display.update()
 
-    # colision check
-    def colisionCheck(self, player_position_x, player_position_y, animal_position_x, animal_position_y):
-        if (player_position_x <= animal_position_x + 31 and player_position_x >= animal_position_x - 31) and player_position_y == animal_position_y:
-            return True
-    
+    # show instructions
+    def showInstructions(self):
+        return self.instructions.render("Use keyboard arrows to get to the camp. Avoid animals!", True, (255, 255, 255))
+
+    # music
+    def playMusic(self):
+        self.music
+        pygame.mixer.music.play(-1)
+   
     # controls
     def operations(self, move_left, move_right, move_up, move_down):
         for event in pygame.event.get():
@@ -60,11 +74,25 @@ class Game:
                 elif event.key == pygame.K_DOWN:
                     move_down
 
-    # show instructions
-    def showInstructions(self):
-        return self.font.render("Use keyboard arrows to get to the camp. Avoid animals!", True, (255, 255, 255))
+    # colision check
+    def colisionCheck(self, player_position_x, player_position_y, animal_position_x, animal_position_y):
+        if (player_position_x <= animal_position_x + 31 and player_position_x >= animal_position_x - 31) and player_position_y == animal_position_y:
+            return True
 
-    # music
-    def playMusic(self):
-        pygame.mixer.music.load("./music/jungle.wav")
+    # camp check
+    def isInCampCheck(self, player_position_x, player_position_y, camp_position_x, camp_position_y):
+        if player_position_x == camp_position_x and player_position_y == camp_position_y:
+            return True
+
+    # show win text
+    def showWinText(self):
+        return self.win.render("You are safe in the camp!", True, (255, 255, 255))
+
+    # change music
+    def changeMusic(self):
+        pygame.mixer.music.stop()
+        # win music
+        self.win_music = pygame.mixer.music.load("./music/camp.wav")
+        # music change
+        self.music = self.win_music
         pygame.mixer.music.play(-1)
