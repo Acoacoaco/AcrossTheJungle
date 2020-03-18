@@ -92,6 +92,7 @@ while game.running:
 
     # is man in camp?
     if game.isInCampCheck(player.position_x, player.position_y, camp.position_x, camp.position_y):
+        player.can_move = 0
         #  win text
         game.draw(game.showWinText(), 65, 200)
         animals_list.clear()
