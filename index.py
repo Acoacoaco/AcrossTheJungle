@@ -114,10 +114,7 @@ while game.running:
         game.draw(game.showInstructions2(), 245, 250)
         animals_list.clear()
         if game.can_change_music == 2:
-            print("dupa")
             game.playMusic("camp")
             game.can_change_music = 0
     # screen update
     game.display()
-
-         
