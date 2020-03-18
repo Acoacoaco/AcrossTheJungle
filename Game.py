@@ -51,6 +51,10 @@ class Game:
     def showInstructions(self):
         return self.instructions.render("Use keyboard arrows to get to the camp. Avoid animals!", True, (255, 255, 255))
 
+    # show instructions2
+    def showInstructions2(self):
+        return self.instructions.render("Press ENTER, if you want to play again.", True, (255, 255, 255))
+
     # music
     def playMusic(self):
         self.music
@@ -96,3 +100,9 @@ class Game:
         # music change
         self.music = self.win_music
         pygame.mixer.music.play(-1)
+
+    # restart
+    def restart(self):
+        import sys
+        import os
+        os.execl(sys.executable, sys.executable, *sys.argv)

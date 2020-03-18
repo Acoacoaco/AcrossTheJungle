@@ -80,6 +80,9 @@ while game.running:
                 player.moveUp()
             elif event.key == pygame.K_DOWN:
                 player.moveDown()
+            elif event.key == pygame.K_RETURN:
+                if not player.can_move:
+                    game.restart()
 
     # animals moves and render
     for animal in animals_list:
@@ -95,6 +98,7 @@ while game.running:
         player.can_move = 0
         #  win text
         game.draw(game.showWinText(), 65, 200)
+        game.draw(game.showInstructions2(), 245, 250)
         animals_list.clear()
         if game.can_change_music:
             game.changeMusic()
