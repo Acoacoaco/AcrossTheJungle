@@ -21,7 +21,6 @@ class Game:
 
         # music
         # https://www.freesoundeffects.com/
-        self.music = pygame.mixer.music.load("./music/jungle.wav")
 
         # change music
         self.can_change_music = 1
@@ -54,11 +53,6 @@ class Game:
     # show instructions2
     def showInstructions2(self):
         return self.instructions.render("Press ENTER, if you want to play again.", True, (255, 255, 255))
-
-    # music
-    def playMusic(self):
-        self.music
-        pygame.mixer.music.play(-1)
    
     # controls
     def operations(self, move_left, move_right, move_up, move_down):
@@ -92,17 +86,16 @@ class Game:
     def showWinText(self):
         return self.win.render("You are safe in the camp!", True, (255, 255, 255))
 
-    # change music
-    def changeMusic(self):
+    # play music
+    def playMusic(self, title):
         pygame.mixer.music.stop()
-        # win music
-        self.win_music = pygame.mixer.music.load("./music/camp.wav")
-        # music change
-        self.music = self.win_music
+        # load music
+        self.music = pygame.mixer.music.load("./music/" +title+ ".wav")
+        # play music
         pygame.mixer.music.play(-1)
 
     # restart
-    def restart(self):
-        import sys
-        import os
-        os.execl(sys.executable, sys.executable, *sys.argv)
+    # def restart(self):
+    #     import sys
+    #     import os
+    #     os.execl(sys.executable, sys.executable, *sys.argv)

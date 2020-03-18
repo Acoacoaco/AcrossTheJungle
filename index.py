@@ -45,9 +45,6 @@ animals_list.append(raccoon)
 animals_list.append(lion)
 animals_list.append(rhino)
 
-# music
-game.playMusic()
-
 # gameloop
 while game.running:
     # background color
@@ -64,6 +61,11 @@ while game.running:
 
     # player draw
     game.draw(player.image, player.position_x, player.position_y)   
+
+    # music
+    if game.can_change_music == 1:
+        game.playMusic("jungle")
+        game.can_change_music = 2
 	
     for event in pygame.event.get():
         #quit option   
@@ -82,7 +84,18 @@ while game.running:
                 player.moveDown()
             elif event.key == pygame.K_RETURN:
                 if not player.can_move:
-                    game.restart()
+                    game.__init__()
+                    camp.__init__()
+                    player.__init__()
+                    animals_list.append(cheatah)
+                    animals_list.append(crocodile)
+                    animals_list.append(elephant)
+                    animals_list.append(giraffe)
+                    animals_list.append(panda)
+                    animals_list.append(monkey)
+                    animals_list.append(raccoon)
+                    animals_list.append(lion)
+                    animals_list.append(rhino)
 
     # animals moves and render
     for animal in animals_list:
@@ -100,8 +113,9 @@ while game.running:
         game.draw(game.showWinText(), 65, 200)
         game.draw(game.showInstructions2(), 245, 250)
         animals_list.clear()
-        if game.can_change_music:
-            game.changeMusic()
+        if game.can_change_music == 2:
+            print("dupa")
+            game.playMusic("camp")
             game.can_change_music = 0
     # screen update
     game.display()
